@@ -6,51 +6,73 @@ For example, in this directory you'll find an example data bag directory called 
 
 Before uploading this item to the server, we must first create the data bag on the Chef Server.
 
-    knife data bag create example
+```bash
+knife data bag create example
+```
 
 Then we can upload the items in the data bag's directory to the Chef Server.
 
-    knife data bag from file example example_item.json
+```bash
+knife data bag from file example example_item.json
+```
 
-For more information on data bags, see the Chef wiki page:
+For more information on data bags, see the [documentation](https://docs.chef.io/data_bags.html).
 
-https://docs.chef.io/data_bags.html
-
-# Encrypted Data Bags
+## Encrypted Data Bags
 
 Encrypted data bags allow you to encrypt the contents of your data bags. The content of attributes will no longer be searchable. To use encrypted data bags, first you must have or create a secret key.
 
-    openssl rand -base64 512 > secret_key
+```bash
+openssl rand -base64 512 > secret_key
+```
 
-You may use this secret_key to add items to a data bag during a create.
+You may use this `secret_key` to add items to a data bag during a create.
 
-    knife data bag create --secret-file secret_key passwords mysql
+```bash
+knife data bag create --secret-file secret_key passwords mysql
+```
 
 You may also use it when adding ITEMs from files,
 
-    knife data bag create passwords
-    knife data bag from file passwords data_bags/passwords/mysql.json --secret-file secret_key
+```bash
+knife data bag create passwords
+knife data bag from file passwords data_bags/passwords/mysql.json --secret-file secret_key
+```
 
-The JSON for the ITEM must contain a key named "id" with a value equal to "ITEM" and the contents will be encrypted when uploaded. For example,
+The JSON for the ITEM must contain a key named `"id"` with a value equal to `"ITEM"` and the contents will be encrypted when uploaded. For example,
 
-    {
-      "id": "mysql",
-      "password": "abc123"
-    }
+```json
+{
+  "id": "mysql",
+  "password": "abc123"
+}
+```
 
-Without the secret_key, the contents are encrypted.
+Without the `secret_key`, the contents are encrypted.
 
-    knife data bag show passwords mysql
-    id:        mysql
-    password:  2I0XUUve1TXEojEyeGsjhw==
+```bash
+knife data bag show passwords mysql
+id:        mysql
+password:  2I0XUUve1TXEojEyeGsjhw==
+```
 
-Use the secret_key to view the contents.
+Use the `secret_key` to view the contents.
 
-    knife data bag show passwords mysql --secret-file secret_key
-    id:        mysql
-    password:  abc123
+```bash
+knife data bag show passwords mysql --secret-file secret_key
+id:        mysql
+password:  abc123
+```
 
+For more information on encrypted data bags, see the [documentation](https://docs.chef.io/data_bags.html).
 
-For more information on encrypted data bags, see the Chef wiki page:
+## Caveats
 
-https://docs.chef.io/data_bags.html
+Using data bags [should be avoided](https://coderanger.net/data-bags/), as the same can be achieved with cookbooks themselves.
+
+## Index
+
+- [Root](../README.md)
+- [Cookbooks](../cookbooks/README.md)
+- [Environments](../environments/README.md)
+- [Roles](../roles/README.md)
