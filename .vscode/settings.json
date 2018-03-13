@@ -1,0 +1,11 @@
+{
+  "cSpell.words": [
+    "artifacts",
+    "Opscode",
+    "Repo",
+    "workflow",
+  ],
+  "foodcritic.enable": false,
+  "rubocop.configFile": ".rubocop.yml",
+  "rubocop.enable": true,
+}
