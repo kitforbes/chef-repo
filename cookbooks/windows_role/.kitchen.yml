@@ -1,0 +1,35 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+  always_update_cookbooks: true
+
+verifier:
+  name: inspec
+
+transport:
+  name: winrm
+  elevated: true
+
+platforms:
+  - name: mwrock/Windows2012R2
+    os_type: windows
+    shell_type: powershell
+    driver:
+      provider: hyperv
+      memory: 2048
+      network:
+        - ["private_network", {bridge: "External Vagrant"}]
+
+suites:
+  - name: default
+    run_list:
+      - recipe[windows_role::default]
+    verifier:
+      inspec_tests:
+        - path: test/integration/default
+        # - name: windows-baseline
+        #   git: https://github.com/dev-sec/windows-baseline.git
+    attributes:
