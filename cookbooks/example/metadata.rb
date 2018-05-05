@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 name 'example'
 maintainer 'Chris Forbes'
 maintainer_email 'kitforbes@users.noreply.github.com'

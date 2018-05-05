@@ -13,13 +13,13 @@ namespace :style do
   desc 'Run Chef style checks'
   FoodCritic::Rake::LintTask.new(:chef) do |task|
     task.options = {
-      fail_tags: ['any'],
+      fail_tags: %w( any ),
     }
   end
 end
 
 desc 'Run style checks'
-task style: %i(style:ruby style:chef)
+task style: %i( style:ruby style:chef )
 
 desc 'Run ChefSpec examples'
 RSpec::Core::RakeTask.new(:unit) do |task|
@@ -35,6 +35,6 @@ task :integration do
   end
 end
 
-task default: %w(style unit)
+task full: %w( style unit integration )
 
-task full: %w(style unit integration)
+task default: %w( style unit )

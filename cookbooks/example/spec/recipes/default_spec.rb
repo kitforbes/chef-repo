@@ -1,8 +1,3 @@
-# frozen_string_literal: true
-
-# Cookbook:: example
-# Spec:: default
-
 require 'spec_helper'
 
 describe 'example::default' do
