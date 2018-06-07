@@ -26,5 +26,5 @@ nodes/
 # !cookbooks/chef_workstation
 
 ## Chef
-# .kitchen/
-# .vagrant/
+.kitchen/
+.vagrant/

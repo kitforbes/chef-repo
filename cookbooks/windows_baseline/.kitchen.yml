@@ -4,6 +4,8 @@ driver:
 
 provisioner:
   name: chef_zero
+  product_name: chef
+  product_version: 13.8.5
   always_update_cookbooks: true
 
 verifier:
@@ -26,7 +28,7 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[windows_role::default]
+      - recipe[windows_baseline::default]
     verifier:
       inspec_tests:
         - path: test/integration/default
