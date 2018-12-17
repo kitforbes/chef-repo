@@ -1,0 +1,9 @@
+[submodule "cookbooks/chef-client"]
+	path = cookbooks/chef-client
+	url = git@github.com:chef-cookbooks/chef-client.git
+[submodule "cookbooks/chocolatey"]
+	path = cookbooks/chocolatey
+	url = git@github.com:chocolatey/chocolatey-cookbook.git
+[submodule "cookbooks/windows"]
+	path = cookbooks/windows
+	url = git@github.com:chef-cookbooks/windows.git
