@@ -1,3 +1,8 @@
+chef_gem 'mixlib-versioning' do
+  compile_time true
+  action :install
+end
+
 include_recipe 'windows_baseline::features'
 include_recipe 'windows_baseline::chocolatey'
 include_recipe 'windows_baseline::google_chrome'

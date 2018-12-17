@@ -1,4 +1,4 @@
 default['chocolatey']['upgrade'] = false
-default['chocolatey']['version'] = '0.10.10'
-default['chocolatey']['install_vars']['chocolateyVersion'] = '0.10.10'
-default['Chocolatey']['install_vars']['chocolateyUseWindowsCompression'] = 'true'
+default['chocolatey']['version'] = '0.10.11'
+default['chocolatey']['install_vars']['chocolateyVersion'] = node['chocolatey']['version']
+default['chocolatey']['install_vars']['chocolateyUseWindowsCompression'] = 'true'

@@ -1,19 +1,18 @@
+return unless node['platform_family'] == 'windows'
+
+require 'mixlib/versioning'
+
 include_recipe 'chocolatey::default'
 
-# chocolatey_version = '0.10.10'
-# chocolatey_install_script = 'https://chocolatey.org/install.ps1'
-# powershell_script 'install-chocolatey' do
-#   code <<-EOH
-#   $env:ChocolateyVersion = '#{chocolatey_version}'
-#   $env:ChocolateyUseWindowsCompression = 'true'
-#   Set-ExecutionPolicy Bypass -Scope Process -Force
-#   Invoke-Expression -Command ((New-Object System.Net.WebClient).DownloadString('#{chocolatey_install_script}'))
-#   EOH
-#   action :run
-#   not_if { ::File.directory?("#{ENV['ALLUSERSPROFILE']}\\chocolatey") }
-# end
+if Mixlib::Versioning.parse(node['chef_packages']['chef']['version']) >= Mixlib::Versioning.parse('14.3')
+  chocolatey_source 'chocolatey' do
+    source 'https://chocolatey.org/api/v2/'
+    action :add
+  end
+end
 
 chocolatey_package 'chocolatey' do
+  options '--allow-downgrade'
   version node['chocolatey']['version']
   action :install
 end

@@ -1,8 +1,6 @@
 # windows_baseline
 
-<!-- begin: description -->
 An example cookbook
-<!-- end: description -->
 
 ## Requirements
 
