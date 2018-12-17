@@ -4,6 +4,7 @@ chef_gem 'mixlib-versioning' do
 end
 
 include_recipe 'windows_baseline::features'
+include_recipe 'windows_baseline::powershell'
 include_recipe 'windows_baseline::chocolatey'
 include_recipe 'windows_baseline::google_chrome'
 include_recipe 'windows_baseline::firefox'
