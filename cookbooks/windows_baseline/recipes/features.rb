@@ -1,3 +1,5 @@
+return unless node['platform_family'] == 'windows'
+
 # Reference: dism /online /Get-Features
 
 %w(

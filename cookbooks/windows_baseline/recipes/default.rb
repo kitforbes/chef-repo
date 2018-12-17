@@ -1,3 +1,5 @@
+return unless node['platform_family'] == 'windows'
+
 chef_gem 'mixlib-versioning' do
   compile_time true
   action :install

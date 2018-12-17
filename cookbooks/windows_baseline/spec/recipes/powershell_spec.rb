@@ -1,4 +1,4 @@
-describe 'windows_baseline::default' do
+describe 'windows_baseline::powershell' do
   include_context 'chef_run'
 
   context 'When all attributes are default' do
