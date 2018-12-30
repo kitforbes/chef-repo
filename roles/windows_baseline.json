@@ -1,9 +1,0 @@
-{
-  "name": "windows_baseline",
-  "description": "Role for all Windows servers",
-  "chef_type": "role",
-  "json_class": "Chef::Role",
-  "run_list": [
-    "recipe[windows_baseline]"
-  ]
-}
