@@ -75,11 +75,11 @@ end
     block do
       Dir.entries(dir).each do |entry|
         next if /^\.|\.\.|chocolatey.log|choco.summary.log$/.match?(entry)
-        FileUtils.remove_entry_secure(::File.join(dir, entry))
+        FileUtils.remove_entry_secure(File.join(dir, entry))
       end
     end
     action :run
-    only_if { Dir.entries(dir).length > 4 }
+    only_if { Dir.exist?(dir) && Dir.entries(dir).length > 4 }
   end
 end
 
@@ -91,10 +91,10 @@ end
     block do
       Dir.entries(dir).each do |entry|
         next if /^\.|\.\.$/.match?(entry)
-        FileUtils.remove_entry_secure(::File.join(dir, entry))
+        FileUtils.remove_entry_secure(File.join(dir, entry))
       end
     end
     action :run
-    only_if { Dir.entries(dir).length > 2 }
+    only_if { Dir.exist?(dir) && Dir.entries(dir).length > 2 }
   end
 end
