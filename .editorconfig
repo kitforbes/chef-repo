@@ -11,8 +11,19 @@ insert_final_newline = true
 [*.{json,xaml,xml,yaml,yml}]
 indent_size = 2
 
+# Chef
 [*.rb]
 indent_size = 2
+end_of_line = lf
+
+[chefignore]
+indent_size = 2
+end_of_line = lf
 
 [{Berks,Rake,Vagrant}file]
 indent_size = 2
+end_of_line = lf
+
+[*.erb]
+indent_size = 2
+end_of_line = lf

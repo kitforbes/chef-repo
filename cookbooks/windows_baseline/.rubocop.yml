@@ -3,4 +3,4 @@ AllCops:
   DisplayStyleGuide: true
 
 Layout/EndOfLine:
-  EnforcedStyle: crlf
+  EnforcedStyle: lf

@@ -60,7 +60,7 @@ end
 [
   "#{chocolatey_install_dir}\\lib-bad",
   "#{chocolatey_install_dir}\\lib-bkp",
-  "#{ENV['UserProfile']}\\AppData\\Local\\NuGet\\Cache"
+  "#{ENV['UserProfile']}\\AppData\\Local\\NuGet\\Cache",
 ].each do |dir|
   directory dir do
     recursive true
@@ -69,7 +69,7 @@ end
 end
 
 [
-  "#{chocolatey_install_dir}\\logs"
+  "#{chocolatey_install_dir}\\logs",
 ].each do |dir|
   ruby_block dir do
     block do
@@ -84,7 +84,7 @@ end
 end
 
 [
-  "#{ENV['Temp']}\\chocolatey"
+  "#{ENV['Temp']}\\chocolatey",
 ].each do |dir|
   # TODO: Create a custom resource for directory cleaning.
   ruby_block dir do
