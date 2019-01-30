@@ -22,6 +22,7 @@ else
   powershell_script 'register-PSGallery' do
     code 'Register-PSRepository -Default'
     action :run
+    guard_interpreter :powershell_script
     only_if '(Get-PSRepository -Name PSGallery -ErrorAction SilentlyContinue) -eq $null'
   end
 end
@@ -32,6 +33,7 @@ powershell_script 'NuGet' do
       Install-PackageProvider -Force -Confirm:$false
   EOH
   action :run
+  guard_interpreter :powershell_script
   only_if '(Get-PackageProvider -Name NuGet -ListAvailable | Where-Object -Property Version -eq 2.8.5.208) -eq $null'
 end
 
@@ -45,4 +47,44 @@ end
 powershell_package 'PackageManagement' do
   version '1.1.7.0'
   action :install
+end
+
+powershell_script 'remove-builtin-PowerShellGet' do
+  code <<-EOH
+  $module = Get-Module -Name PowerShellGet -ListAvailable | Where-Object -Property Version -eq 1.0.0.1
+  Remove-Module $module.Name -Force -Confirm:$false
+  Remove-Item -Path $module.ModuleBase -Force -Recurse
+  EOH
+  action :run
+  guard_interpreter :powershell_script
+  not_if '(Get-Module -Name PowerShellGet -ListAvailable | Where-Object -Property Version -eq 1.0.0.1) -eq $null'
+  guard_interpreter :powershell_script
+  not_if '(Get-Module -Name PowerShellGet -ListAvailable).Count -eq 1'
+end
+
+powershell_script 'remove-builtin-PackageManagement' do
+  code <<-EOH
+  $module = Get-Module -Name PackageManagement -ListAvailable | Where-Object -Property Version -eq 1.0.0.1
+  Remove-Module $module.Name -Force -Confirm:$false
+  Remove-Item -Path $module.ModuleBase -Force -Recurse
+  EOH
+  action :run
+  guard_interpreter :powershell_script
+  not_if '(Get-Module -Name PackageManagement -ListAvailable | Where-Object -Property Version -eq 1.0.0.1) -eq $null'
+  guard_interpreter :powershell_script
+  not_if '(Get-Module -Name PackageManagement -ListAvailable).Count -eq 1'
+end
+
+powershell_script 'remove-builtin-Pester' do
+  code <<-EOH
+  $module = Get-Module -Name Pester -ListAvailable | Where-Object -Property Version -eq 3.4.0
+  Takeown /d Y /R /f $module.ModuleBase | Out-Null
+  Icacls $module.ModuleBase /GRANT:r administrators:F /T /c /q
+  Remove-Item -Path $module.ModuleBase -Force -Recurse
+  EOH
+  action :run
+  guard_interpreter :powershell_script
+  not_if '(Get-Module -Name Pester -ListAvailable | Where-Object -Property Version -eq 3.4.0) -eq $null'
+  guard_interpreter :powershell_script
+  not_if '(Get-Module -Name Pester -ListAvailable).Count -eq 1'
 end
