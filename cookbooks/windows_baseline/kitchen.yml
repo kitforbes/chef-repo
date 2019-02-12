@@ -1,0 +1,55 @@
+---
+# Docs: https://github.com/test-kitchen/kitchen-azurerm
+driver:
+  name: azurerm
+  vm_tags:
+    owner: "<%= ENV['USERNAME'] %>"
+
+driver_config:
+  subscription_id: "<%= ENV['AZURE_SUBSCRIPTION_ID'] %>"
+  location: 'North Europe'
+  machine_size: 'Standard_D1'
+
+provisioner:
+  name: chef_zero # chef_zero, chef_solo
+  product_name: chef # chef, chefdk
+  channel: stable # current, stable, unstable
+  product_version: 14
+  install_strategy: once # once, always, skip
+  always_update_cookbooks: true
+  deprecations_as_errors: true
+  retry_on_exit_code:
+    - 35 # 35 is the exit code signaling that the node is rebooting
+  max_retries: 2
+  wait_for_retry: 90
+
+verifier:
+  name: inspec
+
+transport:
+  name: winrm
+  elevated: true
+
+platforms:
+  - name: windows2016
+    driver_config:
+      image_urn: MicrosoftWindowsServer:WindowsServer:2016-Datacenter:latest
+  - name: windows2012-r2
+    driver_config:
+      image_urn: MicrosoftWindowsServer:WindowsServer:2012-R2-Datacenter:latest
+  - name: windows2008-r2
+    driver_config:
+      image_urn: MicrosoftWindowsServer:WindowsServer:2008-R2-Datacenter:latest
+
+suites:
+  - name: default
+    run_list:
+      - recipe[windows_baseline::default]
+    verifier:
+      inspec_tests:
+        - path: test/integration/default
+        - name: windows-baseline
+          git: https://github.com/dev-sec/windows-baseline.git
+    attributes:
+      powershell:
+        installation_reboot_mode: 'immediate_reboot'
