@@ -1,10 +1,8 @@
 return unless node['platform_family'] == 'windows'
 
-require 'mixlib/versioning'
-
 include_recipe 'chocolatey::default'
 
-# if Mixlib::Versioning.parse(node['chef_packages']['chef']['version']) >= Mixlib::Versioning.parse('14.3')
+# if Gem::Requirement.new('>= 14.3').satisfied_by?(Gem::Version.new(node['chef_packages']['chef']['version']))
 #   chocolatey_source 'chocolatey' do
 #     source 'https://chocolatey.org/api/v2/'
 #     action :add

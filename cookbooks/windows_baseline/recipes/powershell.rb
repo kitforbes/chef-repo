@@ -1,14 +1,10 @@
 return unless node['platform_family'] == 'windows'
 
-require 'mixlib/versioning'
-
-# TODO: Install PowerShell 5.1
-if Mixlib::Versioning.parse(node['languages']['powershell']['version']) < Mixlib::Versioning.parse('5.1')
-  log 'PowerShell 5.1 is required.'
-  return
+if Gem::Requirement.new('< 5.1').satisfied_by?(Gem::Version.new(node['languages']['powershell']['version']))
+  throw 'PowerShell 5.1 is required.'
 end
 
-if Mixlib::Versioning.parse(node['chef_packages']['chef']['version']) >= Mixlib::Versioning.parse('14.3')
+if Gem::Requirement.new('>= 14.3').satisfied_by?(Gem::Version.new(node['chef_packages']['chef']['version']))
   powershell_package_source 'PSGallery' do
     provider_name 'NuGet'
     publish_location 'https://www.powershellgallery.com/api/v2/package/'
