@@ -4,10 +4,6 @@ if Gem::Requirement.new('< 10.0').satisfied_by?(Gem::Version.new(node['platform_
   include_recipe 'powershell::powershell5'
 end
 
-if Gem::Requirement.new('< 5.1').satisfied_by?(Gem::Version.new(node['languages']['powershell']['version']))
-  throw 'PowerShell 5.1 is required.'
-end
-
 if Gem::Requirement.new('>= 14.3').satisfied_by?(Gem::Version.new(node['chef_packages']['chef']['version']))
   powershell_package_source 'PSGallery' do
     provider_name 'NuGet'
@@ -37,54 +33,32 @@ powershell_script 'NuGet' do
   only_if '(Get-PackageProvider -Name NuGet -ListAvailable | Where-Object -Property Version -eq 2.8.5.208) -eq $null'
 end
 
-# Includes 'PackageManagement'
-powershell_package 'PowerShellGet' do
-  version '1.6.0'
-  action :install
+[
+  # Includes 'PackageManagement'
+  { name: 'PowerShellGet', version: '1.6.0' },
+  { name: 'PackageManagement', version: '1.1.7.0' },
+].each do |m|
+  powershell_package m[:name] do
+    version m[:version]
+    action :install
+  end
 end
 
-# Dependency of 'PowerShellGet'
-powershell_package 'PackageManagement' do
-  version '1.1.7.0'
-  action :install
-end
-
-powershell_script 'remove-builtin-PowerShellGet' do
-  code <<-EOH
-  $module = Get-Module -Name PowerShellGet -ListAvailable | Where-Object -Property Version -eq 1.0.0.1
-  Remove-Module $module.Name -Force -Confirm:$false
-  Remove-Item -Path $module.ModuleBase -Force -Recurse
-  EOH
-  action :run
-  guard_interpreter :powershell_script
-  not_if '(Get-Module -Name PowerShellGet -ListAvailable | Where-Object -Property Version -eq 1.0.0.1) -eq $null'
-  guard_interpreter :powershell_script
-  not_if '(Get-Module -Name PowerShellGet -ListAvailable).Count -eq 1'
-end
-
-powershell_script 'remove-builtin-PackageManagement' do
-  code <<-EOH
-  $module = Get-Module -Name PackageManagement -ListAvailable | Where-Object -Property Version -eq 1.0.0.1
-  Remove-Module $module.Name -Force -Confirm:$false
-  Remove-Item -Path $module.ModuleBase -Force -Recurse
-  EOH
-  action :run
-  guard_interpreter :powershell_script
-  not_if '(Get-Module -Name PackageManagement -ListAvailable | Where-Object -Property Version -eq 1.0.0.1) -eq $null'
-  guard_interpreter :powershell_script
-  not_if '(Get-Module -Name PackageManagement -ListAvailable).Count -eq 1'
-end
-
-powershell_script 'remove-builtin-Pester' do
-  code <<-EOH
-  $module = Get-Module -Name Pester -ListAvailable | Where-Object -Property Version -eq 3.4.0
-  Takeown /d Y /R /f $module.ModuleBase | Out-Null
-  Icacls $module.ModuleBase /GRANT:r administrators:F /T /c /q
-  Remove-Item -Path $module.ModuleBase -Force -Recurse
-  EOH
-  action :run
-  guard_interpreter :powershell_script
-  not_if '(Get-Module -Name Pester -ListAvailable | Where-Object -Property Version -eq 3.4.0) -eq $null'
-  guard_interpreter :powershell_script
-  not_if '(Get-Module -Name Pester -ListAvailable).Count -eq 1'
+[
+  { name: 'PowerShellGet', version: '1.0.0.1' },
+  { name: 'PackageManagement', version: '1.0.0.1' },
+  { name: 'Pester', version: '3.4.0' },
+].each do |m|
+  powershell_script "remove-builtin-#{m[:name]}" do
+    code <<-EOH
+    $module = Get-Module -Name #{m[:name]} -ListAvailable | Where-Object -Property Version -eq #{m[:version]}
+    Remove-Module $module.Name -Force -Confirm:$false
+    Remove-Item -Path $module.ModuleBase -Force -Recurse
+    EOH
+    action :run
+    guard_interpreter :powershell_script
+    not_if "(Get-Module -Name #{m[:name]} -ListAvailable | Where-Object -Property Version -eq #{m[:version]}) -eq $null"
+    guard_interpreter :powershell_script
+    not_if "(Get-Module -Name #{m[:name]} -ListAvailable).Count -eq 1"
+  end
 end
