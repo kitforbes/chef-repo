@@ -1,3 +1,5 @@
+default['powershell']['installation_reboot_mode'] = 'immediate_reboot'
+
 default['chocolatey']['upgrade'] = false
 default['chocolatey']['version'] = '0.10.11'
 default['chocolatey']['install_vars'].tap do |env|

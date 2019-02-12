@@ -1,5 +1,9 @@
 return unless node['platform_family'] == 'windows'
 
+if Gem::Requirement.new('< 10.0').satisfied_by?(Gem::Version.new(node['platform_version']))
+  include_recipe 'powershell::powershell5'
+end
+
 if Gem::Requirement.new('< 5.1').satisfied_by?(Gem::Version.new(node['languages']['powershell']['version']))
   throw 'PowerShell 5.1 is required.'
 end
