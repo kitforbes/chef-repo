@@ -3,12 +3,13 @@
 driver:
   name: azurerm
   vm_tags:
-    owner: "<%= ENV['USERNAME'] %>"
+    owner: <%= ENV['USERNAME'] %>
+    project: <%= ::File.basename(::File.dirname(__FILE__)) %>
 
 driver_config:
-  subscription_id: "<%= ENV['AZURE_SUBSCRIPTION_ID'] %>"
-  location: 'North Europe'
-  machine_size: 'Standard_D1'
+  subscription_id: <%= ENV['AZURE_SUBSCRIPTION_ID'] %>
+  location: North Europe
+  machine_size: Standard_D1
 
 provisioner:
   name: chef_zero # chef_zero, chef_solo
@@ -44,7 +45,7 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[windows_baseline::default]
+      - recipe[<%= ::File.basename(::File.dirname(__FILE__)) %>::default]
     verifier:
       inspec_tests:
         - path: test/integration/default
@@ -52,4 +53,4 @@ suites:
           git: https://github.com/dev-sec/windows-baseline.git
     attributes:
       powershell:
-        installation_reboot_mode: 'immediate_reboot'
+        installation_reboot_mode: immediate_reboot
