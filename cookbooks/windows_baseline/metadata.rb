@@ -1,6 +1,6 @@
 name 'windows_baseline'
 maintainer 'Chris Forbes'
-maintainer_email 'kitforbes@users.noreply.github.com'
+maintainer_email 'chef@chrisforbes.dev'
 license 'MIT'
 description ''
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))

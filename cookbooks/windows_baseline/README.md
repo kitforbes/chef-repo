@@ -22,7 +22,7 @@ _No dependencies defined_
 
 ## Maintainer
 
-Maintainer:: Chris Forbes ([kitforbes@users.noreply.github.com](kitforbes@users.noreply.github.com))
+Maintainer:: Chris Forbes ([chef@chrisforbes.dev](chef@chrisforbes.dev))
 
 ## License
 
