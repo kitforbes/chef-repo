@@ -58,7 +58,6 @@ end
     action :run
     guard_interpreter :powershell_script
     not_if "(Get-Module -Name #{m[:name]} -ListAvailable | Where-Object -Property Version -eq #{m[:version]}) -eq $null"
-    guard_interpreter :powershell_script
     not_if "(Get-Module -Name #{m[:name]} -ListAvailable).Count -eq 1"
   end
 end

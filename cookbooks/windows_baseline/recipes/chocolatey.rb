@@ -2,13 +2,6 @@ return unless node['platform_family'] == 'windows'
 
 include_recipe 'chocolatey::default'
 
-# if Gem::Requirement.new('>= 14.3').satisfied_by?(Gem::Version.new(node['chef_packages']['chef']['version']))
-#   chocolatey_source 'chocolatey' do
-#     source 'https://chocolatey.org/api/v2/'
-#     action :add
-#   end
-# end
-
 chocolatey_package 'chocolatey' do
   options '--allow-downgrade'
   version node['chocolatey']['version']
@@ -71,13 +64,13 @@ end
 ].each do |dir|
   ruby_block dir do
     block do
-      Dir.entries(dir).each do |entry|
+      ::Dir.entries(dir).each do |entry|
         next if /^\.|\.\.|chocolatey.log|choco.summary.log$/.match?(entry)
-        FileUtils.remove_entry_secure(File.join(dir, entry))
+        ::FileUtils.remove_entry_secure(::File.join(dir, entry))
       end
     end
     action :run
-    only_if { Dir.exist?(dir) && Dir.entries(dir).length > 4 }
+    only_if { ::Dir.exist?(dir) && ::Dir.entries(dir).length > 4 }
   end
 end
 
@@ -87,12 +80,12 @@ end
   # TODO: Create a custom resource for directory cleaning.
   ruby_block dir do
     block do
-      Dir.entries(dir).each do |entry|
+      ::Dir.entries(dir).each do |entry|
         next if /^\.|\.\.$/.match?(entry)
-        FileUtils.remove_entry_secure(File.join(dir, entry))
+        ::FileUtils.remove_entry_secure(::File.join(dir, entry))
       end
     end
     action :run
-    only_if { Dir.exist?(dir) && Dir.entries(dir).length > 2 }
+    only_if { ::Dir.exist?(dir) && ::Dir.entries(dir).length > 2 }
   end
 end
