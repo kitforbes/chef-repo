@@ -7,3 +7,9 @@
 [submodule "cookbooks/windows"]
 	path = cookbooks/windows
 	url = git@github.com:chef-cookbooks/windows.git
+[submodule "cookbooks/powershell"]
+	path = cookbooks/powershell
+	url = git@github.com:chef-cookbooks/powershell.git
+[submodule "cookbooks/ms_dotnet"]
+	path = cookbooks/ms_dotnet
+	url = git@github.com:criteo-cookbooks/ms_dotnet.git
