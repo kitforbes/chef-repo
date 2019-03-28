@@ -18,13 +18,13 @@ registry_key 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explor
       # Show super hidden items.
       name: 'ShowSuperHidden',
       type: :dword,
-      data: 1,
+      data: 0,
     },
     {
       # Show server administrator UI.
       name: 'ServerAdminUI',
       type: :dword,
-      data: 1,
+      data: 0,
     },
     {
       # Colour compressed files.

@@ -12,8 +12,7 @@
 
 ## Ignore Chef related files and secrets
 .chef/
-.chef/*.pem
-.chef/encrypted_data_bag_secret
+!.chef/knife.rb
 
 ## Ignore Chef-Zero files
 clients/

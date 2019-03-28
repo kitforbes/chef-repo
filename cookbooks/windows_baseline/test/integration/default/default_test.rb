@@ -1,4 +1,4 @@
-# Inspec test for recipe my_windows::default
+# Inspec test for recipe windows_baseline::default
 
 describe windows_feature('Telnet-Server') do
   it { should_not be_installed }
