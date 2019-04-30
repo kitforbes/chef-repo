@@ -4,23 +4,11 @@ if Gem::Requirement.new('< 10.0').satisfied_by?(Gem::Version.new(node['platform_
   include_recipe 'powershell::powershell5'
 end
 
-if Gem::Requirement.new('>= 14.3').satisfied_by?(Gem::Version.new(node['chef_packages']['chef']['version']))
-  powershell_package_source 'PSGallery' do
-    provider_name 'NuGet'
-    publish_location 'https://www.powershellgallery.com/api/v2/package/'
-    script_publish_location 'https://www.powershellgallery.com/api/v2/package/'
-    script_source_location 'https://www.powershellgallery.com/api/v2/items/psscript/'
-    url 'https://www.powershellgallery.com/api/v2'
-    trusted false
-    action :register
-  end
-else
-  powershell_script 'register-PSGallery' do
-    code 'Register-PSRepository -Default'
-    action :run
-    guard_interpreter :powershell_script
-    only_if '(Get-PSRepository -Name PSGallery -ErrorAction SilentlyContinue) -eq $null'
-  end
+powershell_script 'PSGallery' do
+  code 'Register-PSRepository -Default'
+  action :run
+  guard_interpreter :powershell_script
+  only_if '(Get-PSRepository -Name PSGallery -ErrorAction SilentlyContinue) -eq $null'
 end
 
 powershell_script 'NuGet' do
