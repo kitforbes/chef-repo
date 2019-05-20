@@ -34,3 +34,23 @@ default['git']['github_repositories'] = [
   'vscode-chef',
 ]
 default['git']['gitlab_repositories'] = []
+
+default['vscode']['extensions'] = [
+  'bbenoist.vagrant',
+  'burtlo.inspec',
+  'codezombiech.gitignore',
+  'DotJoshJohnson.xml',
+  'EditorConfig.EditorConfig',
+  'hashhar.gitattributes',
+  'jirkafajfr.vscode-kitchen',
+  'mauve.terraform',
+  'ms-python.python',
+  'ms-vscode.cpptools',
+  'ms-vscode.csharp',
+  'ms-vscode.PowerShell',
+  'Pendrica.chef',
+  'PeterJausovec.vscode-docker',
+  'vscoss.vscode-ansible',
+  'waderyan.gitblame',
+  'wholroyd.jinja',
+]

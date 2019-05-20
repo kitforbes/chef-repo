@@ -2,6 +2,29 @@ describe 'development::default' do
   include_context 'chef_run'
 
   before do
+    # Stubs for "development::vs_code"
+    [
+      'bbenoist.vagrant',
+      'burtlo.inspec',
+      'codezombiech.gitignore',
+      'DotJoshJohnson.xml',
+      'EditorConfig.EditorConfig',
+      'hashhar.gitattributes',
+      'jirkafajfr.vscode-kitchen',
+      'mauve.terraform',
+      'ms-python.python',
+      'ms-vscode.cpptools',
+      'ms-vscode.csharp',
+      'ms-vscode.PowerShell',
+      'Pendrica.chef',
+      'PeterJausovec.vscode-docker',
+      'vscoss.vscode-ansible',
+      'waderyan.gitblame',
+      'wholroyd.jinja',
+    ].each do |extension|
+      stub_command "[Boolean]((code --list-extensions) -like '#{extension}')"
+    end
+
     # Stubs for "windows_baseline"
     stub_command('(Get-SmbServerConfiguration).EnableSMB1Protocol -eq $false')
     stub_command('(Get-PSRepository -Name PSGallery -ErrorAction SilentlyContinue) -eq $null')

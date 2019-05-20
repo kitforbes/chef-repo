@@ -6,6 +6,7 @@ include_recipe 'windows_baseline::default'
   powershell
   git
   chef_workstation
+  vs_code
 ).each do |recipe|
   include_recipe "development::#{recipe}"
 end

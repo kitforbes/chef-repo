@@ -1,0 +1,55 @@
+{
+  "cSpell.enabledLanguageIds": [
+    "c",
+    "cpp",
+    "csharp",
+    "go",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "latex",
+    "markdown",
+    "php",
+    "plaintext",
+    "python",
+    "shellscript",
+    "text",
+    "typescript",
+    "typescriptreact",
+    "yml"
+  ],
+  "cSpell.ignorePaths": [
+    "**/node_modules/**",
+    "**/vscode-extension/**",
+    "**/.git/**",
+    "**/.terraform/**",
+    ".vscode",
+    "typings"
+  ],
+  "cSpell.language": "en-GB",
+  "cSpell.userWords": [],
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.cursorStyle": "line",
+  "editor.formatOnSave": true,
+  "editor.formatOnType": false,
+  "editor.mouseWheelZoom": true,
+  "editor.renderIndentGuides": true,
+  "editor.rulers": [
+    80,
+    120
+  ],
+  "editor.wordWrap": true,
+  "explorer.confirmDragAndDrop": false,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/.DS_Store": true
+  },
+  "files.trimTrailingWhitespace": true,
+  "telemetry.enableCrashReporter": false,
+  "telemetry.enableTelemetry": false,
+  "update.channel": "default",
+  "window.zoomLevel": 2,
+  "workbench.iconTheme": "vs-seti"
+}
