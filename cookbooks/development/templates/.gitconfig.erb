@@ -1,0 +1,102 @@
+[alias]
+	# Shorthand for `checkout`.
+	co = checkout
+	# Status with untracked files.
+	st = status -u
+	# Status with untracked and ignored files.
+	sti = status -u -v --ignored
+	# See the last commit.
+	last = log -1 HEAD
+	# See the last 10 commits.
+	lt = log --oneline -n 10
+	# See commits involving a particular file - `git lf [path-to-file]`.
+	lf = log --follow
+	# Reset tracked files to last committed state.
+	undo = reset --hard
+	# Unstage any staged files.
+	unstage = reset HEAD --
+	# Remove all untracked files and folders.
+	wipe = clean -xfd
+	# Output the changes to tracked files in the console.
+	diffs = diff --
+	# Summarise changes to tracked files - as it looks when you pull changes from the remote.
+	diffstat = diff --stat -r
+	# Simplified list of changes to files.
+	changes = diff --name-status -r
+	# See staged diff.
+	staged = diff --staged
+	# Shorthand for a commit with a message - Usage `git cm "Add some stuff"`.
+	cm = "!f() { git commit -m \"$1\"; }; f"
+	# Remove all local branches except the specified branch - Usage `git cleanbranches master`.
+	cleanbranches = "!f() { git checkout \"$1\"; git branch; git branch | grep -v \"$1\" | xargs git branch -D; git remote prune origin; git branch -a; }; f"
+	# Get the name of the current branch - not needed if your terminal displays this for you.
+	currentbranch = rev-parse --abbrev-ref HEAD
+	# A prettier `git log`.
+	prettylog = log --graph --pretty=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)< %an>%Creset' --abbrev-commit --date=relative
+	# Closest thing to a branch tree.
+	tree = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+
+[branch]
+	# Automatically rebase when pulling.
+	autosetuprebase = always
+
+[color]
+	# Options for changing some of the colours in the terminal.
+	ui = true
+
+[color "branch"]
+	current = bold green
+	remote = yellow
+	upstream = blue
+
+[color "status"]
+	header = normal
+	added = green bold
+	changed = yellow bold
+	untracked = cyan bold
+	branch = yellow
+	nobranch = cyan
+
+[color "diff"]
+	plain = white
+	meta = cyan
+	frag = blue
+	func = cyan
+	old = yellow bold
+	new = green bold
+
+[core]
+	# Correct line endings on Windows.
+	autocrlf = true
+	# Define an external editor for `git commit --amend` - set to VS Code.
+	editor = code --wait
+
+[diff]
+	tool = vscode
+
+[difftool "vscode"]
+	cmd = code --wait --diff $LOCAL $REMOTE
+
+[help]
+	# Enable/Disable git command correction. `statud` becomes `status`.
+	autocorrect = 0
+
+[merge]
+	# Name of merge tool to be used in this configuration file.
+	tool = meld
+
+[mergetool]
+	# Retain the `.orig` file.
+	keepBackup = false
+
+[mergetool "meld"]
+	# Path to mergetool.
+	path = C:/Program Files (x86)/Meld
+
+[push]
+	# Instruct git to match names when pushing without specifying an upstream.
+	default = upstream
+
+[user]
+	email = <%= @email %>
+	name = <%= @name %>

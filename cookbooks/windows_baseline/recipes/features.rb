@@ -9,7 +9,7 @@ end
 
 # Reference: dism /online /Get-Features
 [
-  'Internet-Explorer-Optional-amd64'.
+  'Internet-Explorer-Optional-amd64',
   'SMB1Protocol',
   'Telnet-Client',
   'Telnet-Server',
