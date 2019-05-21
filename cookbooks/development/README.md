@@ -21,10 +21,16 @@ Development requirements.
 
 - `development::chef_workstation`
 - `development::default`
+- `development::docker`
+- `development::dotnet`
 - `development::git`
+- `development::packer`
 - `development::powershell`
+- `development::terraform`
 - `development::utilities`
 - `development::vs_code`
+- `development::vagrant`
+- `development::virtualbox`
 
 ## Maintainer
 
