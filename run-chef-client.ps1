@@ -8,17 +8,23 @@ param (
 begin {
     $ErrorActionPreference = 'Stop'
 
-    $process = Start-Process -FilePath 'berks' -ArgumentList 'vendor', "$PSScriptRoot\vendor\cookbooks", '--delete' -NoNewWindow -Wait -PassThru
+    function Invoke-CleanExit ($ExitCode) {
+        Pop-Location
+        exit $ExitCode
+    }
+
+    Push-Location -Path $PSScriptRoot
+    $process = Start-Process -FilePath 'berks' -ArgumentList 'vendor', "$PSScriptRoot\vendor\cookbooks", '-b', "$PSScriptRoot\Berksfile", '--delete' -NoNewWindow -Wait -PassThru
     $process.WaitForExit()
     if ($process.ExitCode -ne 0) {
-        exit $process.ExitCode
+        Invoke-CleanExit -ExitCode $process.ExitCode
     }
 
     $process = Start-Process -FilePath 'chef-client' -ArgumentList '-z', '-o', "'$RunList'" -NoNewWindow -Wait -PassThru
     $process.WaitForExit()
     if ($process.ExitCode -ne 0) {
-        exit $process.ExitCode
+        Invoke-CleanExit -ExitCode $process.ExitCode
     }
 
-    exit 0
+    Invoke-CleanExit -ExitCode 0
 }
