@@ -6,12 +6,10 @@ default['git']['github_repositories'] = [
   '1PasswordPS',
   'automaton',
   'bootstrap',
-  'chef_client_updater',
   'chef-repo',
   'computational-intelligence',
   'concurrent-and-parallel-systems',
   'Crawler',
-  'docker-packer-ansible',
   'environments',
   'floppy',
   'games-engineering',
@@ -31,9 +29,9 @@ default['git']['github_repositories'] = [
   'trap',
   'unite',
   'UtilitiesPS',
-  'vscode-chef',
 ]
-default['git']['gitlab_repositories'] = []
+default['git']['gitlab_repositories'] = [
+]
 
 default['vscode']['extensions'] = [
   'bbenoist.vagrant',
