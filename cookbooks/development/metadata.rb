@@ -9,7 +9,6 @@ version '0.1.0'
 supports 'windows'
 
 depends 'windows'
-depends 'windows_baseline'
 
 source_url 'https://github.com/kitforbes/chef-repo'
 issues_url 'https://github.com/kitforbes/chef-repo/issues'

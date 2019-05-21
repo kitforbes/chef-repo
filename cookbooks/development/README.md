@@ -11,7 +11,6 @@ Development requirements.
 ### Cookbooks
 
 - `windows`
-- `windows_baseline`
 
 ## Attributes
 
