@@ -14,6 +14,10 @@ return unless node['platform_family'] == 'windows'
   end
 end
 
+powershell_package 'UtilitiesPS' do
+  action :install
+end
+
 template "#{ENV['HOME']}\\Documents\\WindowsPowerShell\\Microsoft.PowerShell_profile.ps1" do
   source 'Microsoft.PowerShell_profile.ps1.erb'
   action :create
