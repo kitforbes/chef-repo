@@ -3,7 +3,7 @@ return unless node['platform_family'] == 'windows'
 [
   'C:\\dev',
   "C:\\dev\\#{node['git']['username']}",
-  "#{ENV['USERPROFILE']}\\.ssh",
+  "#{ENV['HOME']}\\.ssh",
 ].each do |dir|
   directory dir do
     action :create
@@ -15,7 +15,7 @@ chocolatey_package 'git' do
   action :install
 end
 
-template "#{ENV['USERPROFILE']}\\.gitconfig" do
+template "#{ENV['HOME']}\\.gitconfig" do
   source '.gitconfig.erb'
   variables(
     email: node['git']['config']['email'],
@@ -24,7 +24,7 @@ template "#{ENV['USERPROFILE']}\\.gitconfig" do
   action :create
 end
 
-template "#{ENV['USERPROFILE']}\\.ssh\\config" do
+template "#{ENV['HOME']}\\.ssh\\config" do
   source 'config.erb'
   action :create
 end

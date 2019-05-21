@@ -1,6 +1,6 @@
 return unless node['platform_family'] == 'windows'
 
-vscode_directory = "#{ENV['USERPROFILE']}\\AppData\\Roaming\\Code"
+vscode_directory = "#{ENV['HOME']}\\AppData\\Roaming\\Code"
 
 chocolatey_package 'visualstudiocode' do
   options '--params "/NoDesktopIcon"'

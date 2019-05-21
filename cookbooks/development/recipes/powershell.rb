@@ -14,7 +14,7 @@ return unless node['platform_family'] == 'windows'
   end
 end
 
-template "#{ENV['USERPROFILE']}\\Documents\\WindowsPowerShell\\Microsoft.PowerShell_profile.ps1" do
+template "#{ENV['HOME']}\\Documents\\WindowsPowerShell\\Microsoft.PowerShell_profile.ps1" do
   source 'Microsoft.PowerShell_profile.ps1.erb'
   action :create
 end

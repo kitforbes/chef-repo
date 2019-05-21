@@ -81,7 +81,7 @@ end
 [
   "#{chocolatey_install_dir}\\lib-bad",
   "#{chocolatey_install_dir}\\lib-bkp",
-  "#{ENV['UserProfile']}\\AppData\\Local\\NuGet\\Cache",
+  "#{ENV['HOME']}\\AppData\\Local\\NuGet\\Cache",
 ].each do |dir|
   directory dir do
     recursive true
