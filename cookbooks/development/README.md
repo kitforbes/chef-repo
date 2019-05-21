@@ -23,6 +23,8 @@ Development requirements.
 - `development::default`
 - `development::git`
 - `development::powershell`
+- `development::utilities`
+- `development::vs_code`
 
 ## Maintainer
 
