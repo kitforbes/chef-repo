@@ -14,4 +14,4 @@ depends 'windows'
 
 source_url 'https://github.com/kitforbes/chef-repo'
 issues_url 'https://github.com/kitforbes/chef-repo/issues'
-chef_version '>= 13' if respond_to?(:chef_version)
+chef_version '>= 14.3' if respond_to?(:chef_version)

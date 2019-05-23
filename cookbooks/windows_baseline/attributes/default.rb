@@ -9,41 +9,41 @@ end
 
 # Modify global Chocolatey configuration.
 default['chocolatey']['config'].tap do |config|
-  config['cache_location'] = nil
-  config['contains_legacy_package_installs'] = true
-  config['command_execution_timeout_seconds'] = 2700
+  config['cacheLocation'] = nil
+  config['containsLegacyPackageInstalls'] = true
+  config['commandExecutionTimeoutSeconds'] = 2700
   config['proxy'] = nil
-  config['proxy_user'] = nil
-  config['proxy_password'] = nil
-  config['web_request_timeout_seconds'] = 30
-  config['proxy_bypass_list'] = nil
-  config['proxy_bypass_on_local'] = true
+  config['proxyUser'] = nil
+  config['proxyPassword'] = nil
+  config['webRequestTimeoutSeconds'] = 30
+  config['proxyBypassList'] = nil
+  config['proxyBypassOnLocal'] = true
 end
 
 # Modify global Chocolatey features.
 default['chocolatey']['features'].tap do |feature|
-  feature['checksum_files'] = true
-  feature['auto_uninstaller'] = true
-  feature['allow_global_confirmation'] = false
-  feature['fail_on_auto_uninstaller'] = false
-  feature['fail_on_standard_error'] = false
-  feature['allow_empty_checksums'] = false
-  feature['allow_empty_checksums_secure'] = true
-  feature['powershell_host'] = true
-  feature['log_environment_values'] = false
-  feature['virus_check'] = false
-  feature['fail_on_invalid_or_missing_license'] = false
-  feature['ignore_invalid_options_switches'] = false
-  feature['use_package_exit_codes'] = true
-  feature['use_fips_compliant_checksums'] = false
-  feature['show_non_elevated_warnings'] = true
-  feature['show_download_progress'] = false
-  feature['stop_on_first_package_failure'] = true
-  feature['use_remembered_arguments_for_upgrades'] = false
-  feature['scripts_check_last_exit_code'] = false
-  feature['ignore_unfound_packages_on_upgrade_outdated'] = false
-  feature['remove_package_information_on_uninstall'] = true
-  feature['log_without_color'] = false
+  feature['checksumFiles'] = true
+  feature['autoUninstaller'] = true
+  feature['allowGlobalConfirmation'] = false
+  feature['failOnAutoUninstaller'] = false
+  feature['failOnStandardRrror'] = false
+  feature['allowEmptyChecksums'] = false
+  feature['allowEmptyChecksumsSecure'] = true
+  feature['powershellHost'] = true
+  feature['logEnvironmentValues'] = false
+  feature['virusCheck'] = false
+  feature['failOnInvalidOrMissingLicense'] = false
+  feature['ignoreInvalidOptionsSwitches'] = false
+  feature['usePackageExitCodes'] = true
+  feature['useFipsCompliantChecksums'] = false
+  feature['showNonElevatedWarnings'] = true
+  feature['showDownloadProgress'] = false
+  feature['stopOnFirstPackageFailure'] = true
+  feature['useRememberedArgumentsForUpgrades'] = false
+  feature['scriptsCheckLastExitCode'] = false
+  feature['ignoreUnfoundPackagesOnUpgradeOutdated'] = false
+  feature['removePackageInformationOnUninstall'] = true
+  feature['logWithoutColor'] = false
 end
 
 # Whether or not to allow the public Chocolatey gallery.
