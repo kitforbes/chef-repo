@@ -35,6 +35,10 @@
 	prettylog = log --graph --pretty=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)< %an>%Creset' --abbrev-commit --date=relative
 	# Closest thing to a branch tree.
 	tree = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+	# Add HEAD reference to master
+	addhead = symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/master
+	# Remove HEAD reference
+	removehead = update-ref -d refs/remotes/origin/HEAD
 
 [branch]
 	# Automatically rebase when pulling.
