@@ -19,6 +19,7 @@ Development requirements.
 ## Recipes
 
 - `development::chef_workstation`
+- `development::cmder`
 - `development::default`
 - `development::docker`
 - `development::dotnet`

@@ -1,5 +1,9 @@
 root = false
 
+[cmder_ConEmu.xml.erb]
+indent_style = tab
+indent_size = 4
+
 [.gitconfig.erb]
 indent_style = tab
 indent_size = 2
