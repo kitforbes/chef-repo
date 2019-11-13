@@ -1,6 +1,7 @@
 return unless platform_family?('windows')
 
 chocolatey_package 'vagrant' do
+  returns [0, 3010]
   action :install
 end
 

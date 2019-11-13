@@ -29,9 +29,11 @@ template "#{ENV['HOME']}\\.ssh\\config" do
   action :create
 end
 
+# TODO: Add to known hosts first.
 node['git']['github_repositories'].each do |repository|
   git "github:#{node['git']['username']}/#{repository}" do
     checkout_branch 'master'
+    enable_checkout false
     destination "C:\\dev\\#{node['git']['username']}\\#{repository}"
     repository "git@github.com:#{node['git']['username']}/#{repository}.git"
     timeout node['git']['timeout']
