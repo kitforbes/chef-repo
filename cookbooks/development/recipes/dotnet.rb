@@ -1,4 +1,4 @@
-return unless node['platform_family'] == 'windows'
+return unless platform_family?('windows')
 
 windows_feature 'NetFx3' do
   install_method :windows_feature_dism

@@ -1,4 +1,4 @@
-return unless node['platform_family'] == 'windows'
+return unless platform_family?('windows')
 
 chocolatey_package 'chef-workstation' do
   version '0.2.39'

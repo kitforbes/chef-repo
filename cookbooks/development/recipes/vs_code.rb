@@ -1,4 +1,4 @@
-return unless node['platform_family'] == 'windows'
+return unless platform_family?('windows')
 
 vscode_directory = "#{ENV['HOME']}\\AppData\\Roaming\\Code"
 

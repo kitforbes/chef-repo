@@ -1,4 +1,4 @@
-return unless node['platform_family'] == 'windows'
+return unless platform_family?('windows')
 
 include_recipe 'windows_baseline::features'
 include_recipe 'windows_baseline::powershell'

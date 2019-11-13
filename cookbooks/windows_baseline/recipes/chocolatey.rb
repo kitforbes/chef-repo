@@ -1,8 +1,8 @@
-return unless node['platform_family'] == 'windows'
+return unless platform_family?('windows')
 
 chocolatey_install_dir = "#{ENV['ALLUSERSPROFILE']}\\chocolatey"
 
-include_recipe 'chocolatey::default' unless ::File.exists?("#{chocolatey_install_dir}\\bin\\choco.exe")
+include_recipe 'chocolatey::default' unless ::File.exist?("#{chocolatey_install_dir}\\bin\\choco.exe")
 
 chocolatey_source 'chocolatey' do
   source 'https://chocolatey.org/api/v2/'

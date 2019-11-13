@@ -1,4 +1,4 @@
-return unless node['platform_family'] == 'windows'
+return unless platform_family?('windows')
 
 [
   { name: 'PSScriptAnalyzer', version: '1.16.1' },

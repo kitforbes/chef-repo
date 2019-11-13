@@ -1,4 +1,4 @@
-return unless node['platform_family'] == 'windows'
+return unless platform_family?('windows')
 
 if Gem::Requirement.new('< 10.0').satisfied_by?(Gem::Version.new(node['platform_version']))
   include_recipe 'powershell::powershell5'
@@ -7,7 +7,6 @@ end
 powershell_script 'PSGallery' do
   code 'Register-PSRepository -Default'
   action :run
-  guard_interpreter :powershell_script
   only_if '(Get-PSRepository -Name PSGallery -ErrorAction SilentlyContinue) -eq $null'
 end
 
@@ -17,7 +16,6 @@ powershell_script 'NuGet' do
       Install-PackageProvider -Force -Confirm:$false
   EOH
   action :run
-  guard_interpreter :powershell_script
   only_if '(Get-PackageProvider -Name NuGet -ListAvailable | Where-Object -Property Version -eq 2.8.5.208) -eq $null'
 end
 
@@ -44,7 +42,6 @@ end
     Remove-Item -Path $module.ModuleBase -Force -Recurse
     EOH
     action :run
-    guard_interpreter :powershell_script
     not_if "(Get-Module -Name #{m[:name]} -ListAvailable | Where-Object -Property Version -eq #{m[:version]}) -eq $null"
     not_if "(Get-Module -Name #{m[:name]} -ListAvailable).Count -eq 1"
   end
