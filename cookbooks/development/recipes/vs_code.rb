@@ -1,26 +1,27 @@
 return unless platform_family?('windows')
 
-vscode_directory = "#{ENV['HOME']}\\AppData\\Roaming\\Code"
+vscode_install_directory = 'C:\\Program Files\\Microsoft VS Code'
+safe_vscode_install_directory = vscode_install_directory.gsub! ' ', '` '
+vscode_data_directory = "#{ENV['HOME']}\\AppData\\Roaming\\Code"
 
-chocolatey_package 'visualstudiocode' do
+chocolatey_package 'vscode' do
   options '--params "/NoDesktopIcon"'
   action :install
 end
 
-windows_path 'C:\\Program Files\\Microsoft VS Code\\bin' do
+windows_path "#{vscode_install_directory}\\bin" do
   action :add
 end
 
-cookbook_file "#{vscode_directory}\\User\\settings.json" do
+cookbook_file "#{vscode_data_directory}\\User\\settings.json" do
   source 'settings.json'
   action :create
 end
 
 node['vscode']['extensions'].each do |extension|
   powershell_script "install-#{extension}" do
-    code "code --install-extension #{extension}"
+    code "#{safe_vscode_install_directory}\\bin\\code.cmd --install-extension #{extension}"
     action :run
-    guard_interpreter :powershell_script
-    not_if "[Boolean]((code --list-extensions) -like '#{extension}')"
+    not_if "[Boolean]((#{safe_vscode_install_directory}\\bin\\code.cmd --list-extensions) -like '#{extension}')"
   end
 end

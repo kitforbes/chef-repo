@@ -2,7 +2,10 @@
 param (
     [Parameter(Mandatory = $false)]
     [String]
-    $RunList = 'windows_baseline::default'
+    $RunList = 'windows_baseline::default',
+    [Parameter(Mandatory = $false)]
+    [String]
+    $ChefInstallDirectory = 'C:\opscode\chef-workstation'
 )
 
 begin {
@@ -14,13 +17,17 @@ begin {
     }
 
     Push-Location -Path $PSScriptRoot
-    $process = Start-Process -FilePath 'berks' -ArgumentList 'vendor', "$PSScriptRoot\vendor\cookbooks", '-b', "$PSScriptRoot\Berksfile", '--delete' -NoNewWindow -Wait -PassThru
+    if (Test-Path -Path "$PSScriptRoot\vendor\cookbooks") {
+        Remove-Item -Path "$PSScriptRoot\vendor\cookbooks" -Recurse -Force
+    }
+
+    $process = Start-Process -FilePath "$ChefInstallDirectory\bin\berks.bat" -ArgumentList 'vendor', "$PSScriptRoot\vendor\cookbooks", '-b', "$PSScriptRoot\Berksfile", '--delete' -NoNewWindow -Wait -PassThru
     $process.WaitForExit()
     if ($process.ExitCode -ne 0) {
         Invoke-CleanExit -ExitCode $process.ExitCode
     }
 
-    $process = Start-Process -FilePath 'chef-client' -ArgumentList '-z', '-o', "'$RunList'" -NoNewWindow -Wait -PassThru
+    $process = Start-Process -FilePath "$ChefInstallDirectory\bin\chef-client.bat" -ArgumentList '-z', '-o', "'$RunList'" -NoNewWindow -Wait -PassThru
     $process.WaitForExit()
     if ($process.ExitCode -ne 0) {
         Invoke-CleanExit -ExitCode $process.ExitCode

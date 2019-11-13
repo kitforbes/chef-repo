@@ -22,7 +22,7 @@ describe 'development::default' do
       'waderyan.gitblame',
       'wholroyd.jinja',
     ].each do |extension|
-      stub_command "[Boolean]((code --list-extensions) -like '#{extension}')"
+      stub_command "[Boolean]((C:\\Program` Files\\Microsoft` VS` Code\\bin\\code.cmd --list-extensions) -like '#{extension}')"
     end
 
     # Stubs for "windows_baseline"
