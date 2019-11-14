@@ -1,12 +1,6 @@
-Host github.com
-    User git
-    HostName github.com
-    IdentityFile ~/.ssh/id_rsa
-Host gitlab.com
-    User git
-    HostName gitlab.com
-    IdentityFile ~/.ssh/id_rsa
-Host bitbucket.org
-    User git
-    HostName bitbucket.org
-    IdentityFile ~/.ssh/id_rsa
+<% @hosts.each do |h| %>
+Host <%= h[:host] %>
+  User <%= h[:user] %>
+  HostName <%= h[:host] %>
+  IdentityFile <%= h[:identityFile] %>
+<% end %>
