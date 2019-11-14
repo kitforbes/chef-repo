@@ -28,54 +28,35 @@ file "#{ENV['HOME']}\\.ssh\\known_hosts" do
   action :create
 end
 
+hosts = []
+node['git']['servers'].each do |server|
+  hosts.push(
+    host: server['host'],
+    identityFile: server['identityFile']
+  )
+end
+
 template "#{ENV['HOME']}\\.ssh\\config" do
   source 'config.erb'
   variables(
-    hosts: [
-      {
-        host: 'github.com',
-        user: 'git',
-        identityFile: '~/.ssh/github',
-      },
-      {
-        host: 'gitlab.com',
-        user: 'git',
-        identityFile: '~/.ssh/id_rsa',
-      },
-      {
-        host: 'bitbucket.org',
-        user: 'git',
-        identityFile: '~/.ssh/id_rsa',
-      },
-    ]
+    hosts: hosts
   )
   action :create
 end
 
 # TODO: Add to known hosts first.
-node['git']['github_repositories'].each do |repository|
-  git "github:#{node['git']['username']}/#{repository}" do
-    checkout_branch 'master'
-    revision 'master'
-    destination "C:\\dev\\#{node['git']['username']}\\#{repository}"
-    repository "git@github.com:#{node['git']['username']}/#{repository}.git"
-    timeout node['git']['timeout']
-    enable_checkout false
-    enable_submodules true
-    action :checkout
-  end
-end
-
-node['git']['gitlab_repositories'].each do |repository|
-  git "gitlab:#{node['git']['username']}/#{repository}" do
-    checkout_branch 'master'
-    revision 'master'
-    destination "C:\\dev\\#{node['git']['username']}\\#{repository}"
-    repository "git@gitlab.com:#{node['git']['username']}/#{repository}.git"
-    timeout node['git']['timeout']
-    enable_checkout false
-    enable_submodules true
-    action :checkout
+node['git']['servers'].each do |server|
+  server['repositories'].each do |repository|
+    git "#{server['host']}:#{server['organisation']}/#{repository}" do
+      checkout_branch 'master'
+      revision 'master'
+      destination "C:\\dev\\#{server['organisation']}\\#{repository}"
+      repository "git@#{server['host']}:#{server['organisation']}/#{repository}.git"
+      timeout node['git']['timeout']
+      enable_checkout false
+      enable_submodules true
+      action :checkout
+    end
   end
 end
 
