@@ -41,3 +41,27 @@ registry_key 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explor
   ]
   action :create
 end
+
+registry_key 'HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Windows Search' do
+  values [
+    {
+      # Disable Cortana.
+      name: 'AllowCortana',
+      type: :dword,
+      data: 0,
+    },
+  ]
+  action :create
+end
+
+registry_key 'HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Explorer' do
+  values [
+    {
+      # Disable Bing in Start Menu.
+      name: 'DisableSearchBoxSuggestions',
+      type: :dword,
+      data: 1,
+    },
+  ]
+  action :create
+end
